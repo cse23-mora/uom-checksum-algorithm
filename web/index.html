@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UOM Index Number Checker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge">Academic Tool</span>
+            <h1>University of Moratuwa</h1>
+            <p class="subtitle">Student Index Number Checksum Validator</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <div class="input-group">
+                    <label for="indexInput">Enter Index Number</label>
+                    <input type="text" id="indexInput" placeholder="" maxlength="7" autocomplete="off">
+                </div>
+                
+                <div id="result" class="result-area hidden">
+                    <div class="status-icon" id="statusIcon"></div>
+                    <div class="message" id="resultMessage"></div>
+                    <div class="suggestion" id="resultSuggestion"></div>
+                </div>
+
+                <div class="algorithm-brief">
+                    <h3>How it works:</h3>
+                    <ul>
+                        <li><strong>Weights:</strong> 8, 7, 6, 5, 4, 3</li>
+                        <li><strong>Modulo:</strong> 19 (Prime)</li>
+                        <li><strong>Excludes:</strong> I, O, Q, S, Z</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Reverse-engineered for educational purposes.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
