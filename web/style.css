@@ -1,5 +1,6 @@
 :root {
     --primary-color: #007bff;
+    --primary-color-hover: #005ec4;
     --success-color: #28a745;
     --danger-color: #dc3545;
     --bg-color: #f8f9fa;
@@ -173,6 +174,23 @@ h1 {
 
 .algorithm-brief li strong {
     color: var(--text-main);
+}
+
+.read-article-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.read-article-button:hover {
+    background-color: var(--primary-color-hover);
 }
 
 footer {
