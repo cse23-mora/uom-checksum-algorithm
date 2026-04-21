@@ -175,6 +175,23 @@ h1 {
     color: var(--text-main);
 }
 
+.read-article-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.read-article-button:hover {
+    background-color: #005ec4;
+}
+
 footer {
     margin-top: 30px;
 }
