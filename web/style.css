@@ -1,5 +1,6 @@
 :root {
     --primary-color: #007bff;
+    --primary-color-hover: #005ec4;
     --success-color: #28a745;
     --danger-color: #dc3545;
     --bg-color: #f8f9fa;
@@ -189,7 +190,7 @@ h1 {
 }
 
 .read-article-button:hover {
-    background-color: #005ec4;
+    background-color: var(--primary-color-hover);
 }
 
 footer {
