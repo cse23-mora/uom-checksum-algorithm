@@ -133,3 +133,38 @@ An interactive CLI tool is provided for terminal use.
 
 ## 🛠️ Setup & Installation
 *Created to explore the beauty of mathematical engineering in academic systems.*
+
+## PS: Updated Logic (Latest)
+
+The checker now uses batch-based mapping in both implementations:
+
+1. Read the first 6 digits.
+2. Compute weighted sum using 8, 7, 6, 5, 4, 3.
+3. Compute remainder = sum % 19.
+4. Select mapping by batch year (first 2 digits):
+	- Batch year <= 19: use legacy mapping.
+	- Batch year >= 20: use new mapping.
+
+### New Mapping Table (Batch >= 20)
+
+| Remainder | Letter | | Remainder | Letter | | Remainder | Letter |
+| :---: | :---: |---| :---: | :---: |---| :---: | :---: |
+| **0** | H | | **7** | R | | **14** | C |
+| **1** | J | | **8** | T | | **15** | D |
+| **2** | K | | **9** | U | | **16** | E |
+| **3** | L | | **10** | V | | **17** | F |
+| **4** | M | | **11** | X | | **18** | G |
+| **5** | N | | **12** | A | | | |
+| **6** | P | | **13** | B | | | |
+
+### Legacy Mapping Table (Batch <= 19)
+
+| Remainder | Letter | | Remainder | Letter | | Remainder | Letter |
+| :---: | :---: |---| :---: | :---: |---| :---: | :---: |
+| **0** | P | | **7** | B | | **14** | J |
+| **1** | R | | **8** | C | | **15** | K |
+| **2** | T | | **9** | D | | **16** | L |
+| **3** | U | | **10** | E | | **17** | M |
+| **4** | V | | **11** | F | | **18** | N |
+| **5** | X | | **12** | G | | | |
+| **6** | A | | **13** | H | | | |

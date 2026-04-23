@@ -1,5 +1,3 @@
-import sys
-
 def calculate_check_letter(index_str):
     index_str = str(index_str).strip().upper()
     
@@ -13,25 +11,42 @@ def calculate_check_letter(index_str):
     if not digits_part.isdigit():
         return None, "The first 6 characters must be digits."
     
-    # Weights and Mapping as per the UOM algorithm
-    weights = [8, 7, 6, 5, 4, 3]
-    mapping = {
-        0: 'H', 1: 'J', 2: 'K', 3: 'L', 4: 'M', 5: 'N', 6: 'P', 
-        7: 'R', 8: 'T', 9: 'U', 10: 'V', 11: 'X', 12: 'A', 
-        13: 'B', 14: 'C', 15: 'D', 16: 'E', 17: 'F', 18: 'G'
-    }
+    # Extract batch year (first 2 digits)
+    batch_year = int(digits_part[:2])
     
-    total_sum = 0
-    for i in range(6):
-        total_sum += int(digits_part[i]) * weights[i]
-        
+    # Weights (same for all batches)
+    weights = [8, 7, 6, 5, 4, 3]
+    
+    # New mapping (Batch 20+)
+    new_mapping = [
+        'H','J','K','L','M','N','P','R','T',
+        'U','V','X','A','B','C','D','E','F','G'
+    ]
+    
+    # Legacy mapping (Batch ≤19)
+    old_mapping = [
+        'P','R','T','U','V','X','A','B','C',
+        'D','E','F','G','H','J','K','L','M','N'
+    ]
+    
+    # Choose correct mapping
+    mapping = old_mapping if batch_year <= 19 else new_mapping
+    
+    # Calculate weighted sum
+    total_sum = sum(int(digits_part[i]) * weights[i] for i in range(6))
+    
+    # Modulo 19
     remainder = total_sum % 19
+    
+    # Get expected letter
     expected_letter = mapping[remainder]
     
     return expected_letter, actual_letter, digits_part
 
+
 def main():
     print("🎓 University of Moratuwa - Index Number Checker")
+    print("Supports both legacy (≤19) and new (20+) batches")
     print("Type 'exit' or press Ctrl+C to quit.\n")
     
     while True:
@@ -44,17 +59,17 @@ def main():
             if not user_input:
                 continue
                 
-            expected, actual, digits = calculate_check_letter(user_input)
+            result = calculate_check_letter(user_input)
             
-            if expected is None:
-                print(f"❌ Error: {actual}")
+            if result[0] is None:
+                print(f"❌ Error: {result[1]}")
                 print("-" * 40)
                 continue
             
+            expected, actual, digits = result
             full_correct_index = f"{digits}{expected}"
             
             if not actual:
-                # If user only entered digits, just show what the full index should be
                 print(f"💡 The complete index number is: {full_correct_index}")
             elif actual == expected:
                 print(f"✅ Correct! '{user_input}' is a valid index number.")
@@ -69,6 +84,7 @@ def main():
             break
         except Exception as e:
             print(f"An error occurred: {e}")
+
 
 if __name__ == "__main__":
     main()

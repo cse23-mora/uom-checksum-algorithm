@@ -4,11 +4,15 @@ const statusIcon = document.getElementById('statusIcon');
 const resultMessage = document.getElementById('resultMessage');
 const resultSuggestion = document.getElementById('resultSuggestion');
 
-const mapping = {
-    0: 'H', 1: 'J', 2: 'K', 3: 'L', 4: 'M', 5: 'N', 6: 'P', 
-    7: 'R', 8: 'T', 9: 'U', 10: 'V', 11: 'X', 12: 'A', 
-    13: 'B', 14: 'C', 15: 'D', 16: 'E', 17: 'F', 18: 'G'
-};
+const newMapping = [
+    'H', 'J', 'K', 'L', 'M', 'N', 'P', 'R', 'T',
+    'U', 'V', 'X', 'A', 'B', 'C', 'D', 'E', 'F', 'G'
+];
+
+const oldMapping = [
+    'P', 'R', 'T', 'U', 'V', 'X', 'A', 'B', 'C',
+    'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N'
+];
 
 const weights = [8, 7, 6, 5, 4, 3];
 
@@ -17,7 +21,10 @@ function calculateExpectedLetter(digits) {
     for (let i = 0; i < 6; i++) {
         sum += parseInt(digits[i]) * weights[i];
     }
-    return mapping[sum % 19];
+
+    const batchYear = parseInt(digits.substring(0, 2), 10);
+    const selectedMapping = batchYear <= 19 ? oldMapping : newMapping;
+    return selectedMapping[sum % 19];
 }
 
 indexInput.addEventListener('input', (e) => {
@@ -42,13 +49,13 @@ indexInput.addEventListener('input', (e) => {
 
     if (actualLetter === "") {
         // Suggestion mode
-        showResult('suggestion-mode', '💡 Check Letter: ' + expectedLetter, `Complete Index: ${digits}${expectedLetter}`);
+        showResult('suggestion-mode', '💡 Check Letter: ' + expectedLetter, `The complete index number is: ${digits}${expectedLetter}`);
     } else if (actualLetter === expectedLetter) {
         // Correct mode
-        showResult('correct', '✅ Valid Index', `${digits}${actualLetter} is a correct UOM index.`);
+        showResult('correct', '✅ Correct', `'${digits}${actualLetter}' is a valid index number.`);
     } else {
         // Error mode
-        showResult('incorrect', '❌ Invalid Letter', `Expected '${expectedLetter}', but got '${actualLetter}'.`);
+        showResult('incorrect', `❌ Incorrect. The letter '${actualLetter}' is wrong.`, `The correct index number should be: ${digits}${expectedLetter}`);
     }
 });
 
