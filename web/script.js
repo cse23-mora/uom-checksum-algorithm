@@ -9,9 +9,14 @@ const newMapping = [
     'U', 'V', 'X', 'A', 'B', 'C', 'D', 'E', 'F', 'G'
 ];
 
-const oldMapping = [
+const legacyMapping = [
     'P', 'R', 'T', 'U', 'V', 'X', 'A', 'B', 'C',
     'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N'
+];
+
+const originalMapping = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J',
+    'K', 'L', 'M', 'N', 'P', 'R', 'T', 'U', 'V', 'X'
 ];
 
 const weights = [8, 7, 6, 5, 4, 3];
@@ -23,7 +28,15 @@ function calculateExpectedLetter(digits) {
     }
 
     const batchYear = parseInt(digits.substring(0, 2), 10);
-    const selectedMapping = batchYear <= 19 ? oldMapping : newMapping;
+    let selectedMapping;
+    if (batchYear >= 20) {
+        selectedMapping = newMapping;
+    } else if (batchYear >= 10) {
+        selectedMapping = legacyMapping;
+    } else {
+        selectedMapping = originalMapping;
+    }
+
     return selectedMapping[sum % 19];
 }
 

@@ -73,7 +73,7 @@ Divide 60 by 19.
 Our remainder is **3**. 
 
 **4. Check the Lookup Table:**
-Using the official UOM remainder mapping:
+Using the UOM remainder mapping for batch 20 and newer:
 
 | Remainder | Letter | | Remainder | Letter | | Remainder | Letter |
 | :---: | :---: |---| :---: | :---: |---| :---: | :---: |
@@ -142,8 +142,9 @@ The checker now uses batch-based mapping in both implementations:
 2. Compute weighted sum using 8, 7, 6, 5, 4, 3.
 3. Compute remainder = sum % 19.
 4. Select mapping by batch year (first 2 digits):
-	- Batch year <= 19: use legacy mapping.
 	- Batch year >= 20: use new mapping.
+	- Batch year 10 to 19: use legacy mapping.
+	- Batch year <= 09: use original mapping.
 
 ### New Mapping Table (Batch >= 20)
 
@@ -157,7 +158,7 @@ The checker now uses batch-based mapping in both implementations:
 | **5** | N | | **12** | A | | | |
 | **6** | P | | **13** | B | | | |
 
-### Legacy Mapping Table (Batch <= 19)
+### Legacy Mapping Table (Batch 10-19)
 
 | Remainder | Letter | | Remainder | Letter | | Remainder | Letter |
 | :---: | :---: |---| :---: | :---: |---| :---: | :---: |
@@ -168,3 +169,15 @@ The checker now uses batch-based mapping in both implementations:
 | **4** | V | | **11** | F | | **18** | N |
 | **5** | X | | **12** | G | | | |
 | **6** | A | | **13** | H | | | |
+
+### Original Mapping Table (Batch <= 09)
+
+| Remainder | Letter | | Remainder | Letter | | Remainder | Letter |
+| :---: | :---: |---| :---: | :---: |---| :---: | :---: |
+| **0** | A | | **7** | H | | **14** | R |
+| **1** | B | | **8** | J | | **15** | T |
+| **2** | C | | **9** | K | | **16** | U |
+| **3** | D | | **10** | L | | **17** | V |
+| **4** | E | | **11** | M | | **18** | X |
+| **5** | F | | **12** | N | | | |
+| **6** | G | | **13** | P | | | |

@@ -23,14 +23,25 @@ def calculate_check_letter(index_str):
         'U','V','X','A','B','C','D','E','F','G'
     ]
     
-    # Legacy mapping (Batch ≤19)
-    old_mapping = [
+    # Legacy mapping (Batch 10-19)
+    legacy_mapping = [
         'P','R','T','U','V','X','A','B','C',
         'D','E','F','G','H','J','K','L','M','N'
     ]
+
+    # Original mapping (Batch 09 and below)
+    original_mapping = [
+        'A','B','C','D','E','F','G','H','J',
+        'K','L','M','N','P','R','T','U','V','X'
+    ]
     
     # Choose correct mapping
-    mapping = old_mapping if batch_year <= 19 else new_mapping
+    if batch_year >= 20:
+        mapping = new_mapping
+    elif batch_year >= 10:
+        mapping = legacy_mapping
+    else:
+        mapping = original_mapping
     
     # Calculate weighted sum
     total_sum = sum(int(digits_part[i]) * weights[i] for i in range(6))
@@ -46,7 +57,7 @@ def calculate_check_letter(index_str):
 
 def main():
     print("🎓 University of Moratuwa - Index Number Checker")
-    print("Supports both legacy (≤19) and new (20+) batches")
+    print("Supports original (<=09), legacy (10-19), and new (20+) batches")
     print("Type 'exit' or press Ctrl+C to quit.\n")
     
     while True:
